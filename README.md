@@ -1,8 +1,10 @@
 # JQuery-Showmore
 
-JQuery Plugin to hinde and show parts of content in a container by changing its height.
+JQuery Plugin to hide and show parts of content in a container by changing the container's height.
+
 The height is animated by CSS transition.
-Windows resize events will handled gracefully.
+
+Window-resize events will be handled gracefully.
 
 ## Usage
 
@@ -24,4 +26,5 @@ $('#container').showmore({
 ## License
 
 MIT License (MIT)
+
 Copyright (c) 2017 Viktor Grandgeorg
