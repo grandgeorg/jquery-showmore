@@ -1,0 +1,24 @@
+{
+  "name": "jquery-showmore",
+  "license": "MIT",
+  "authors": [
+    "viktor Grandgeorg <viktor@grandgeorg.de>"
+  ],
+  "description": "Showmore jQuery Plugin.",
+  "homepage": "https://grandgeorg.de",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "jquery-plugin",
+    "jquery-showmore"
+  ],
+  "main": "src/jquery.showmore.js",
+  "dependencies": {
+    "jquery": "1"
+  },
+  "ignore": [
+    "npm-debug.log",
+    "bower_components",
+    "node_modules"
+  ]
+}

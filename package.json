@@ -1,0 +1,46 @@
+{
+  "name": "jquery-showmore",
+  "version": "1.0.0",
+  "description": "JQuery Plugin to toggle a container's height by a button.",
+  "keywords": [
+    "jquery-plugin",
+    "jquery",
+    "boilerplate",
+    "plugins"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grandgeorg/jquery-showmore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/grandgeorg/jquery-showmore/issues"
+  },
+  "author": {
+    "name": "Viktor Grandgeorg",
+    "email": "viktor@grandgeorg.de",
+    "url": "https://github.com/grandgeorg"
+  },
+  "homepage": "https://grandgeorg.de",
+  "contributors": [
+    {
+      "name": "Viktor Grandgeorg",
+      "email": "viktor@grandgeorg.de",
+      "url": "https://github.com/grandgeorg"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": ">=1.5.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-uglify": "^0.9.2",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jscs": "^2.7.0",
+    "jscs": "^2.10.1"
+  },
+  "scripts": {
+  }
+}

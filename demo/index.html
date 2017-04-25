@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>jquery-showmore</title>
+    <style>
+        .wrapper {
+            max-width: 900px;
+            margin: 15px auto 0;
+        }
+        .container {
+            border-top: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+            padding: 0 2rem;
+            line-height: 1.5;
+        }
+        .showmore-button {
+            border-top: 1px solid #ccc;
+            text-align: center;
+        }
+        .showmore-button-inner {
+            background: #52544c;
+            display: inline-block;
+            padding: 12px 14px;
+            line-height: 14px;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            border-bottom-right-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container" id="container">
+            <p>
+                You do not need the wrapper element - it's just set for some styling purposes.<br>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam facilis harum cupiditate culpa dolores inventore! Vel neque alias, assumenda provident culpa maiores ut delectus minima hic dolorum aliquam molestiae, quaerat.
+                Delectus quos beatae quae alias suscipit nesciunt repellat praesentium repellendus necessitatibus similique. Saepe ad voluptas adipisci iste facere, obcaecati, cupiditate quod quaerat, voluptatem, recusandae nam repellendus aspernatur veniam quisquam non.
+                Perspiciatis voluptate aspernatur dolorum voluptates incidunt numquam fugiat, et? Provident dolore hic, saepe aliquam mollitia laboriosam quisquam itaque, quidem nulla deleniti nihil corporis rerum ut laborum repellat qui praesentium sint.
+                Culpa, quod quae consectetur non nam. Neque perspiciatis blanditiis a omnis tempore ipsam, minima molestias iste, et quidem! Eos nesciunt odit numquam esse ab hic praesentium voluptas quasi, dolorum fugit!
+                Obcaecati nobis accusamus enim vel reprehenderit minus unde doloremque id facilis alias illo distinctio dignissimos esse odit reiciendis, quibusdam sunt iste consectetur harum nam fuga incidunt ullam eos quo, architecto!
+                Delectus et adipisci porro iusto officiis assumenda suscipit, ullam enim maxime. Omnis quo excepturi temporibus ratione, corrupti repellendus sapiente itaque accusantium, impedit laudantium inventore nemo fugiat culpa. Adipisci, laudantium eligendi!
+                Dolor inventore ea debitis incidunt non porro dolores ipsa odit perspiciatis, quaerat doloremque numquam corporis suscipit delectus eveniet facere sed ad, beatae ducimus! Praesentium atque earum, neque velit aspernatur, eaque!
+                Quidem architecto nulla cumque omnis nihil dignissimos ullam in quibusdam officia natus eum iste sint, quisquam, aspernatur, consequatur accusantium vel voluptas eius reprehenderit magni eveniet minima. Dignissimos quae deserunt, dolorum!
+                Quisquam voluptatibus minus quidem quod illo, adipisci dicta velit quia dignissimos accusamus, commodi ut culpa autem labore aperiam consequatur voluptates? Nihil, illo culpa sapiente vel, ut esse sit atque ipsum.
+                Exercitationem, blanditiis, odit! Dolor quasi culpa, sint in enim! Ipsum, voluptatibus! Dignissimos necessitatibus nulla quibusdam aliquid qui laborum quis eveniet laudantium perferendis nisi! Accusantium soluta, et earum iste perferendis nemo.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam facilis harum cupiditate culpa dolores inventore! Vel neque alias, assumenda provident culpa maiores ut delectus minima hic dolorum aliquam molestiae, quaerat.
+                Delectus quos beatae quae alias suscipit nesciunt repellat praesentium repellendus necessitatibus similique. Saepe ad voluptas adipisci iste facere, obcaecati, cupiditate quod quaerat, voluptatem, recusandae nam repellendus aspernatur veniam quisquam non.
+                Perspiciatis voluptate aspernatur dolorum voluptates incidunt numquam fugiat, et? Provident dolore hic, saepe aliquam mollitia laboriosam quisquam itaque, quidem nulla deleniti nihil corporis rerum ut laborum repellat qui praesentium sint.
+                Culpa, quod quae consectetur non nam. Neque perspiciatis blanditiis a omnis tempore ipsam, minima molestias iste, et quidem! Eos nesciunt odit numquam esse ab hic praesentium voluptas quasi, dolorum fugit!
+                Obcaecati nobis accusamus enim vel reprehenderit minus unde doloremque id facilis alias illo distinctio dignissimos esse odit reiciendis, quibusdam sunt iste consectetur harum nam fuga incidunt ullam eos quo, architecto!
+                Delectus et adipisci porro iusto officiis assumenda suscipit, ullam enim maxime. Omnis quo excepturi temporibus ratione, corrupti repellendus sapiente itaque accusantium, impedit laudantium inventore nemo fugiat culpa. Adipisci, laudantium eligendi!
+                Dolor inventore ea debitis incidunt non porro dolores ipsa odit perspiciatis, quaerat doloremque numquam corporis suscipit delectus eveniet facere sed ad, beatae ducimus! Praesentium atque earum, neque velit aspernatur, eaque!
+                Quidem architecto nulla cumque omnis nihil dignissimos ullam in quibusdam officia natus eum iste sint, quisquam, aspernatur, consequatur accusantium vel voluptas eius reprehenderit magni eveniet minima. Dignissimos quae deserunt, dolorum!
+                Quisquam voluptatibus minus quidem quod illo, adipisci dicta velit quia dignissimos accusamus, commodi ut culpa autem labore aperiam consequatur voluptates? Nihil, illo culpa sapiente vel, ut esse sit atque ipsum.
+                Exercitationem, blanditiis, odit! Dolor quasi culpa, sint in enim! Ipsum, voluptatibus! Dignissimos necessitatibus nulla quibusdam aliquid qui laborum quis eveniet laudantium perferendis nisi! Accusantium soluta, et earum iste perferendis nemo.
+            </p>
+        </div>
+    </div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+    window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">\x3C/script>')
+    </script>
+    <!-- <script src="../src/jquery.showmore.js"></script> -->
+    <script src="../dist/jquery.showmore.min.js"></script>
+    <script>
+        $( document ).ready(function() {
+            $('#container').showmore({
+                closedHeight: 70,
+                buttonTextMore: 'Show more',
+                buttonTextLess: 'Show less',
+                buttonCssClass: 'showmore-button',
+                animationSpeed: 0.5
+            });
+        });
+    </script>
+</body>
+</html>
