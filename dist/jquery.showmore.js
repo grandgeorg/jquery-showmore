@@ -36,8 +36,6 @@
 
             var element = $(this.element);
             var settings = this.settings;
-            var currentId = element.attr('id') !== undefined ?
-                element.attr('id') : Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 9);
             var innerHeight = element.innerHeight();
 
             if (settings.animationSpeed > 10) {
@@ -70,7 +68,6 @@
             });
 
             var showMoreButton = $('<div />', {
-                id: 'showmore-button-' + currentId,
                 'class': settings.buttonCssClass,
                 click: function(e) {
                     e.preventDefault();
