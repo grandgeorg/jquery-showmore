@@ -45,7 +45,7 @@
 
             element.addClass('closed').css({
                 'height': settings.closedHeight,
-                'transition': 'all ' + settings.animationSpeed + 's ease',
+                'transition': 'height ' + settings.animationSpeed + 's ease',
                 'overflow': 'hidden'
             });
 
