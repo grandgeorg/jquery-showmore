@@ -1,11 +1,3 @@
-/*
- *  jquery-showmore - v1.2.0
- *  JQuery Plugin to toggle a container's height by a button.
- *  https://grandgeorg.de
- *
- *  Made by Viktor Grandgeorg
- *  Under MIT License
- */
 ;
 (function($, window, document, undefined) {
 
@@ -37,7 +29,7 @@
 
             var element = $(this.element);
             var settings = this.settings;
-            var innerHeight = element.innerHeight();
+            // var innerHeight = element.innerHeight();
 
             if (settings.animationSpeed > 10) {
                 settings.animationSpeed = settings.animationSpeed / 1000;

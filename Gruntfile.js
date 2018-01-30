@@ -43,7 +43,6 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		// Minify definitions
 		uglify: {
 			dist: {
 				src: [ "dist/jquery.showmore.js" ],
@@ -54,9 +53,6 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		// watch for changes to source
-		// Better than calling grunt a million times
-		// (call 'grunt watch')
 		watch: {
 			files: [ "src/*", "test/**/*" ],
 			tasks: [ "default" ]
