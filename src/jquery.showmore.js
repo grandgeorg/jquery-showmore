@@ -1,3 +1,11 @@
+/*
+ *  jquery-showmore - v1.2.0
+ *  JQuery Plugin to toggle a container's height by a button.
+ *  https://grandgeorg.de
+ *
+ *  Made by Viktor Grandgeorg
+ *  Under MIT License
+ */
 ;
 (function($, window, document, undefined) {
 
@@ -9,7 +17,8 @@
             buttonTextMore: 'show more',
             buttonTextLess: 'show less',
             buttonCssClass: 'showmore-button',
-            animationSpeed: 0.5
+            animationSpeed: 0.5,
+            openHeightOffset: 0
         };
 
     function Plugin(element, options) {
@@ -45,18 +54,8 @@
 
             element.addClass('closed').css({
                 'height': settings.closedHeight,
-                'transition': 'height ' + settings.animationSpeed + 's ease',
+                'transition': 'all ' + settings.animationSpeed + 's ease',
                 'overflow': 'hidden'
-            });
-
-            $(window).resize(function() {
-                element.css('height', 'auto');
-                innerHeight = element.innerHeight();
-                if (element.hasClass('closed')) {
-                    element.css('height', settings.closedHeight);
-                } else {
-                    element.css('height', innerHeight);
-                }
             });
 
             var showMoreButton = $('<div />', {
@@ -64,7 +63,15 @@
                 click: function(e) {
                     e.preventDefault();
                     if (element.hasClass('closed')) {
-                        element.removeClass('closed').css('height', innerHeight);
+                        element.css({'height': 'auto', 'transition': 'none'});
+                        var targetHeight = element.innerHeight();
+                        element.css({'height': settings.closedHeight});
+                        // we must call innerHeight() otherwhise there will be no animation
+                        element.innerHeight();
+                        element.removeClass('closed').css({
+                            'height': targetHeight, 
+                            'transition': 'all ' + settings.animationSpeed + 's ease'
+                        });
                         showMoreButton.html(showLessInner);
                     } else {
                         element.addClass('closed').css('height', settings.closedHeight);
@@ -73,7 +80,6 @@
                 },
                 html: showMoreInner
             });
-
             element.after(showMoreButton);
         }
     });
