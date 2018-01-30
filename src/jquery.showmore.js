@@ -10,7 +10,8 @@
             buttonTextLess: 'show less',
             buttonCssClass: 'showmore-button',
             animationSpeed: 0.5,
-            openHeightOffset: 0
+            openHeightOffset: 0,
+            onlyWithWindowMaxWidth: 0
         };
 
     function Plugin(element, options) {
@@ -18,18 +19,52 @@
         this.settings = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
+        this.btn;
         this.init();
     }
 
     $.extend(Plugin.prototype, {
         init: function() {
-            this.showmore();
+            if (this.settings.onlyWithWindowMaxWidth > 0) {
+                this.bindResize();
+                this.responsive();                
+            } else {
+                this.showmore();
+            }
+        },
+        bindResize: function() {
+            if (this.settings.onlyWithWindowMaxWidth > 0) {
+                var self = this;
+                var resizeTimer;
+                $(window).on('resize', function() {
+                    if (resizeTimer) {
+                        clearTimeout(resizeTimer);
+                    }
+                    resizeTimer = setTimeout(function() {
+                        self.responsive();
+                    }, 250);
+                });
+            }
+        },
+        responsive: function() {
+            if (this.settings.onlyWithWindowMaxWidth > 0) {
+                if ($(window).innerWidth() <= this.settings.onlyWithWindowMaxWidth) {
+                    this.showmore();
+                } else {
+                    this.remove();
+                }
+            } else {
+                this.showmore();
+            }
         },
         showmore: function() {
 
+            if (this.btn) {
+                return;
+            }
+
             var element = $(this.element);
             var settings = this.settings;
-            // var innerHeight = element.innerHeight();
 
             if (settings.animationSpeed > 10) {
                 settings.animationSpeed = settings.animationSpeed / 1000;
@@ -48,6 +83,26 @@
                 'height': settings.closedHeight,
                 'transition': 'all ' + settings.animationSpeed + 's ease',
                 'overflow': 'hidden'
+            });
+
+            var resizeTimer;
+            $(window).on('resize', function() {
+                if (!element.hasClass('closed')) {
+                    if (resizeTimer) {
+                        clearTimeout(resizeTimer);
+                    }
+                    resizeTimer = setTimeout(function() {
+                        // resizing has "stopped"
+                        element.css({'height': 'auto', 'transition': 'none'});
+                        var targetHeight = element.innerHeight();
+                        element.css({'height': settings.closedHeight});
+                        element.innerHeight();
+                        element.css({
+                            'height': targetHeight, 
+                            'transition': 'all ' + settings.animationSpeed + 's ease'
+                        });
+                    }, 150); // this must be less than bindResize timeout!
+                }
             });
 
             var showMoreButton = $('<div />', {
@@ -73,6 +128,25 @@
                 html: showMoreInner
             });
             element.after(showMoreButton);
+            this.btn = showMoreButton;
+        },
+        remove: function() {
+            var element = $(this.element);
+            var settings = this.settings;
+            if (element.hasClass('closed')) {
+                element.css({'height': 'auto', 'transition': 'none'});
+                var targetHeight = element.innerHeight();
+                element.css({'height': settings.closedHeight});
+                element.innerHeight();
+                element.removeClass('closed').css({
+                    'height': targetHeight, 
+                    'transition': 'all ' + settings.animationSpeed + 's ease'
+                });
+            }
+            if (this.btn) {
+                this.btn.off('click').empty().remove();
+                this.btn = undefined;
+            }
         }
     });
 
