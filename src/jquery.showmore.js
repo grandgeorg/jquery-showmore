@@ -33,28 +33,22 @@
             }
         },
         bindResize: function() {
-            if (this.settings.onlyWithWindowMaxWidth > 0) {
-                var self = this;
-                var resizeTimer;
-                $(window).on('resize', function() {
-                    if (resizeTimer) {
-                        clearTimeout(resizeTimer);
-                    }
-                    resizeTimer = setTimeout(function() {
-                        self.responsive();
-                    }, 250);
-                });
-            }
+            var self = this;
+            var resizeTimer;
+            $(window).on('resize', function() {
+                if (resizeTimer) {
+                    clearTimeout(resizeTimer);
+                }
+                resizeTimer = setTimeout(function() {
+                    self.responsive();
+                }, 250);
+            });
         },
         responsive: function() {
-            if (this.settings.onlyWithWindowMaxWidth > 0) {
-                if ($(window).innerWidth() <= this.settings.onlyWithWindowMaxWidth) {
-                    this.showmore();
-                } else {
-                    this.remove();
-                }
-            } else {
+            if ($(window).innerWidth() <= this.settings.onlyWithWindowMaxWidth) {
                 this.showmore();
+            } else {
+                this.remove();
             }
         },
         showmore: function() {
@@ -63,6 +57,7 @@
                 return;
             }
 
+            var self = this;
             var element = $(this.element);
             var settings = this.settings;
 
@@ -81,7 +76,6 @@
 
             element.addClass('closed').css({
                 'height': settings.closedHeight,
-                'transition': 'all ' + settings.animationSpeed + 's ease',
                 'overflow': 'hidden'
             });
 
@@ -93,55 +87,62 @@
                     }
                     resizeTimer = setTimeout(function() {
                         // resizing has "stopped"
-                        element.css({'height': 'auto', 'transition': 'none'});
-                        var targetHeight = element.innerHeight();
-                        element.css({'height': settings.closedHeight});
-                        element.innerHeight();
-                        element.css({
-                            'height': targetHeight, 
-                            'transition': 'all ' + settings.animationSpeed + 's ease'
-                        });
+                        self.setOpenHeight(true);
                     }, 150); // this must be less than bindResize timeout!
                 }
             });
 
             var showMoreButton = $('<div />', {
                 'class': settings.buttonCssClass,
-                click: function(e) {
-                    e.preventDefault();
-                    if (element.hasClass('closed')) {
-                        element.css({'height': 'auto', 'transition': 'none'});
-                        var targetHeight = element.innerHeight();
-                        element.css({'height': settings.closedHeight});
-                        // we must call innerHeight() otherwhise there will be no animation
-                        element.innerHeight();
-                        element.removeClass('closed').css({
-                            'height': targetHeight, 
-                            'transition': 'all ' + settings.animationSpeed + 's ease'
-                        });
-                        showMoreButton.html(showLessInner);
-                    } else {
-                        element.addClass('closed').css('height', settings.closedHeight);
-                        showMoreButton.html(showMoreInner);
-                    }
-                },
                 html: showMoreInner
+            });
+
+            showMoreButton.on('click', function(event) {
+                event.preventDefault();
+                if (element.hasClass('closed')) {
+                    self.setOpenHeight();
+                    element.removeClass('closed');
+                    showMoreButton.html(showLessInner);
+                } else {
+                    element.css({
+                        'height': settings.closedHeight,
+                        'transition': 'all ' + settings.animationSpeed + 's ease'
+                    }).addClass('closed');
+                    showMoreButton.html(showMoreInner);
+                }
             });
             element.after(showMoreButton);
             this.btn = showMoreButton;
         },
+
+        setOpenHeight: function(noAnimation) {
+            $(this.element).css({
+                'height': this.getOpenHeight()
+            });
+            if (noAnimation) {
+                $(this.element).css({
+                    'transition': 'none'
+                });    
+            } else {
+                $(this.element).css({
+                    'transition': 'all ' + this.settings.animationSpeed + 's ease'
+                });    
+            }
+        },
+
+        getOpenHeight: function() {
+            $(this.element).css({'height': 'auto', 'transition': 'none'});
+            var targetHeight = $(this.element).innerHeight();
+            $(this.element).css({'height': this.settings.closedHeight});
+            // we must call innerHeight() otherwhise there will be no css animation
+            $(this.element).innerHeight();
+            return targetHeight;
+        },
+
         remove: function() {
-            var element = $(this.element);
-            var settings = this.settings;
-            if (element.hasClass('closed')) {
-                element.css({'height': 'auto', 'transition': 'none'});
-                var targetHeight = element.innerHeight();
-                element.css({'height': settings.closedHeight});
-                element.innerHeight();
-                element.removeClass('closed').css({
-                    'height': targetHeight, 
-                    'transition': 'all ' + settings.animationSpeed + 's ease'
-                });
+            // var element = $(this.element);
+            if ($(this.element).hasClass('closed')) {
+                this.setOpenHeight();
             }
             if (this.btn) {
                 this.btn.off('click').empty().remove();
